@@ -4,17 +4,26 @@ Read
 Update
 Delete
 """
+from fastapi.responses import JSONResponse
 
-from api.user.schemas import UserIn, UserOut, UserInPut
-from api.user.helper import Helper
+from api.users.schemas import UserIn, UserOut, UserInPut
+from api.users.helper import Helper
 
 
 helper = Helper()
 
 
+# def check_token(token):
+#     if token in helper.cache_by_token:
+#         pass
+#     if len(token.split('-')) != 5 or len(token) != 36:
+#         return JSONResponse(status_code=400, content={"error": "incorrect token"})
+
+
 def create_user(user_in: UserIn) -> UserOut:
     user = UserOut(**user_in.dict(), id=helper.next_id)
     helper.db[user.id] = user
+    helper.cache_by_token[user.token] = user
 
     return user
 
@@ -24,7 +33,7 @@ def get_user_by_id(user_id: int) ->UserOut:
     return user
 
 
-def get_user() -> list[UserOut]:
+def get_users() -> list[UserOut]:
     user = list(helper.db.values())
     return user
 
@@ -41,6 +50,6 @@ def put_user(user_id: int, user_in: UserInPut) -> UserOut:
     return user_out
 
 
-def delete_product(user_id: int) -> None:
+def delete_user(user_id: int) -> None:
     if user_id in helper.db:
         del helper.db[user_id]
