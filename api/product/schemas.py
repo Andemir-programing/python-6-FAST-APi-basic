@@ -28,3 +28,4 @@ class ProductOut(ProductBase):
     id: int
 
 
+
