@@ -4,17 +4,16 @@ from enum import Enum
 from pydantic import BaseModel, Field, validator
 
 
-class CatalogEnum(str, Enum):
-    food = "food"
-    phones = "phones"
-    furniture = "furniture"
-    vehicle = "vehicle"
-    international_food = "international_food"
+class RoleEnum(str, Enum):
+    admin = "admin"
+    seller = "phones"
+    expert = "expert"
 
 
-class Catalog(BaseModel):
+class Employee(BaseModel):
+    id: int
     name: str
-    catalog: CatalogEnum
+    role: RoleEnum
 
     # @validator("catalog")
     # def check_catalog(cls, value):
@@ -24,18 +23,18 @@ class Catalog(BaseModel):
     #     return value
 
 
-class UserBase(BaseModel):
-    username: str = None
-    age: int = None
+class EmployeeBase(BaseModel):
+    name: str = None
+    id: int = None
     address: str = None
-    accessed_catalog: Catalog = None
+    role: RoleEnum = None
 
 
-class UserIn(UserBase):
+class EmployeeIn(EmployeeBase):
     pass
 
 
-class UserOut(UserBase):
+class EmployeeOut(EmployeeBase):
     id: int
 
 
@@ -43,6 +42,6 @@ def generate_token():
     return str(uuid4())
 
 
-class CreateUser(UserBase):
+class CreateEmployee(EmployeeBase):
     id: int
     token: str = Field(default_factory=generate_token)
