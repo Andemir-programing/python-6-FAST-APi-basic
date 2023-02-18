@@ -4,58 +4,41 @@ Read
 Update
 Delete
 """
-from typing import Type
 from fastapi import HTTPException
+from sqlalchemy.orm import Session
 
-from api.employee.schemas import EmployeeIn, EmployeeOut, Employee
-from db import db_employee, db_token
+from api.employee.schemas import EmployeeIn, EmployeeOut, EmployeeInPut
+from db import db_employee
 
 
 class Employee:
-    def __init__(self, db_session):
+    def __init__(self, db_session: Session):
         self.db_session = db_session
 
-    def check_token(self, token):
-        if not isinstance(token, str):
-            return {"message": "incorrect token", "details": "type is not string"}
-        if not len(token.split('-')) == 5:
-            return {"message": "incorrect token", "details": "token not with 5 blocks"}
-        user = db_token.get_user_by_token(self.db_session, token)
-        if user is None:
-            return {"message": "Authorization error", "details": "token not in cache"}
+    def create_employee(self, employee_in: EmployeeIn) -> EmployeeOut:
+        employee = db_employee.create_employee(self.db_session, **employee_in.dict())
+        employee_out = EmployeeOut(id=employee.id, name=employee.name,role=employee.role)
+        return employee_out
 
-    def create_employee(self, user_in: EmployeeIn) -> Employee:
-        employee = db_employee.create_employee(self.db_session, **user_in.dict())
-        user_out = Employee(id=employee.id, name=employee.name,
-                            role=employee.role)
-        db_token.add_token(self.db_session, user_out.id, user_out.token)
-        return user_out
-
-    def get_employee_by_id(self, employee_id: int, token: str):
-        errors = self.check_token(token)
-        if errors is None:
-            employee = db_employee.get_employee_by_id(self.db_session, employee_id)
-            if employee:  # ==  if user is not None
-                return EmployeeOut(id=employee.id, name=employee.name,
-                                   role=employee.role)
-            else:
-                raise HTTPException(status_code=404, detail={"message": "employee not found!"})
+    def get_employee_by_id(self, employee_id: int):
+        employee = db_employee.get_employee_by_id(self.db_session, employee_id)
+        if employee:  # ==  if user is not None
+            return EmployeeOut(id=employee.id, name=employee.name, role=employee.role)
         else:
-            raise HTTPException(status_code=400, detail=errors)
+            raise HTTPException(status_code=404, detail={"message": "employee not found!"})
 
-    def get_employees(self) -> [EmployeeOut]:
+    def get_employees(self) -> list[EmployeeOut]:
         results = db_employee.get_all_employees(self.db_session)
         employee_outs = []
-        for u in results:
-            uo = EmployeeOut(id=u.id, name=u.name,role=u.role)
-            employee_outs.append(uo)
+        for p in results:
+            po = EmployeeOut(id=p.id, name=p.name, role=p.role)
+            employee_outs.append(po)
         return employee_outs
 
-    def put_employee(self, employee_id: int, employee_in: EmployeeIn) -> EmployeeOut:
+    def put_employee(self, employee_id: int, employee_in: EmployeeInPut) -> EmployeeOut:
         employee = db_employee.update_employee(self.db_session, employee_id, employee_in)
         if employee:
-            return EmployeeOut(id=employee.id, name=employee.name,
-                               role=employee.role)
+            return EmployeeOut(id=employee.id, name=employee.name,role=employee.role)
         else:
             raise HTTPException(status_code=404, detail={"message": "employee not found!"})
 

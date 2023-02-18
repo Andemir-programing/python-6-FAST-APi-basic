@@ -64,7 +64,7 @@ product_table = Table(
 )
 
 employee_table = Table(
-    'products',
+    'employees',
     metadata,
     Column("id", Integer, primary_key=True, unique=True, autoincrement=True),
     # primary_key - первичный ключ, unique - все id уникальный, autoincrement - авто назначение id

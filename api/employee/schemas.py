@@ -11,22 +11,12 @@ class RoleEnum(str, Enum):
 
 
 class Employee(BaseModel):
-    id: int
     name: str
     role: RoleEnum
-
-    # @validator("catalog")
-    # def check_catalog(cls, value):
-    #     if value not in ["Food", "Furniture", "Vehicle"]:
-    #         raise ValueError(f"{value} is not catalog")
-    #
-    #     return value
 
 
 class EmployeeBase(BaseModel):
     name: str = None
-    id: int = None
-    address: str = None
     role: RoleEnum = None
 
 
@@ -38,10 +28,9 @@ class EmployeeOut(EmployeeBase):
     id: int
 
 
-def generate_token():
-    return str(uuid4())
+class EmployeeInPut(EmployeeBase):
+    name: str = None
+    role: RoleEnum = None
 
 
-class CreateEmployee(EmployeeBase):
-    id: int
-    token: str = Field(default_factory=generate_token)
+
