@@ -26,8 +26,7 @@ from sqlalchemy import (
     Integer,
     String,
     FLOAT,
-    JSON,
-    Enum
+    JSON
 )
 
 DB_URL = "sqlite:///basic_db.sqlite3"
@@ -67,10 +66,8 @@ employee_table = Table(
     'employees',
     metadata,
     Column("id", Integer, primary_key=True, unique=True, autoincrement=True),
-    # primary_key - первичный ключ, unique - все id уникальный, autoincrement - авто назначение id
     Column("name", String),
-    Column("role", JSON)
+    Column("role", String)
 )
-
 
 metadata.create_all(bind=engine)
