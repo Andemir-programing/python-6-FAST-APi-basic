@@ -4,7 +4,7 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
 from api.employee import crud
-from api.employee.schemas import EmployeeIn, EmployeeOut, EmployeeInPut
+from api.employee.schemas import EmployeeIn, EmployeeOut
 from db.session import db_session
 
 router_employee = APIRouter(prefix="/employee", tags=["employee"])
@@ -31,5 +31,5 @@ def delete_employee(employee_id: int, db: Session = Depends(db_session)) -> None
 
 
 @router_employee.put("/{employee_id}")
-def put_employee(employee_id: int, employee_in: EmployeeInPut, db: Session = Depends(db_session)) -> EmployeeOut:
+def put_employee(employee_id: int, employee_in: EmployeeIn, db: Session = Depends(db_session)) -> EmployeeOut:
     return crud.Employee(db).put_employee(employee_id, employee_in)

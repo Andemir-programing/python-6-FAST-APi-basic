@@ -1,11 +1,12 @@
 import requests
 
-from tests.configuration import url
+from tests.configuration import url, token
 
 
 class EmployeeClient:
     def __init__(self):
         self.url = url
+        self.token = token
 
     @staticmethod
     def print_result(response: requests.Response):
@@ -29,10 +30,10 @@ class EmployeeClient:
         self.print_result(response)
         return response
 
-    def create_employee(self, employee_name, role):
+    def create_employee(self, name, role):
         endpoint = f"{self.url}/employee"
         req_dict = {
-            "employee_name": employee_name,
+            "name": name,
             "role": role
         }
 
@@ -40,8 +41,19 @@ class EmployeeClient:
         self.print_result(response)
         return response
 
-    def update_employee(self):
-        pass
+    def update_employee(self, employee_id: int, name: str = None, role: str = None):
+        endpoint = f"{self.url}/employee/{employee_id}"
+        req_dict = {
+            "name": name,
+            "role": role
+        }
 
-    def delete_employee(self):
-        pass
+        response = requests.put(endpoint, json=req_dict)
+        self.print_result(response)
+        return response
+
+    def delete_employee(self, employee_id: int):
+        endpoint = f"{self.url}/employee/{employee_id}"
+        response = requests.delete(endpoint)
+        self.print_result(response)
+        return response

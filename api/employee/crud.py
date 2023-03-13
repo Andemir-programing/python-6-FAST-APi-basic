@@ -7,7 +7,7 @@ Delete
 from fastapi import HTTPException
 from sqlalchemy.orm import Session
 
-from api.employee.schemas import EmployeeIn, EmployeeOut, EmployeeInPut
+from api.employee.schemas import EmployeeIn, EmployeeOut
 from db import db_employee
 
 
@@ -22,7 +22,7 @@ class Employee:
 
     def get_employee_by_id(self, employee_id: int):
         employee = db_employee.get_employee_by_id(self.db_session, employee_id)
-        if employee:  # ==  if user is not None
+        if employee:
             return EmployeeOut(id=employee.id, name=employee.name, role=employee.role)
         else:
             raise HTTPException(status_code=404, detail={"message": "employee not found!"})
@@ -35,7 +35,7 @@ class Employee:
             employee_outs.append(po)
         return employee_outs
 
-    def put_employee(self, employee_id: int, employee_in: EmployeeInPut) -> EmployeeOut:
+    def put_employee(self, employee_id: int, employee_in: EmployeeIn) -> EmployeeOut:
         employee = db_employee.update_employee(self.db_session, employee_id, employee_in)
         if employee:
             return EmployeeOut(id=employee.id, name=employee.name,role=employee.role)

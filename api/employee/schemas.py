@@ -25,3 +25,4 @@ class EmployeeIn(EmployeeBase):
 
 class EmployeeOut(EmployeeBase):
     id: int
+
