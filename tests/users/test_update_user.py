@@ -2,10 +2,12 @@ import random
 import pytest
 
 
-@pytest.mark.parametrize("new_name, new_role", [
-    ("new name user", None),
-    (None, "admin"),
-    ("new name user", "admin")
+@pytest.mark.parametrize("username, age, address, accessed_catalog, exp_code", [
+    ('Ivan', 12, "Nalchik", {"name": "Andemir", "catalog": "phones"}, 200),
+    ("Ivan", 32, "Moscow", {"name": "Volodya", "catalog": "food"}, 200),
+    ("Ivan", 4, "Saint Petersburg", {"name": "Ahmed", "catalog": "furniture"}, 200),
+    ("Ivan", 5, "Rome", {"name": "Damir", "catalog": "vehicle"}, 200),
+    ("Ivan", 28, "Paris", {"name": "Ilyas", "catalog": "international_food"}, 200)
 ])
 def test_positive(user_fixture, new_name, new_role):
     user_id = user_fixture.user_id
