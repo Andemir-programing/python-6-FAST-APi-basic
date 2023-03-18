@@ -75,4 +75,4 @@ def user_fixture():
 def product_fixture():
     fixture.create_product_precondition()
     yield fixture
-    fixture.delete_product_post_condition
+    fixture.delete_product_post_condition()
