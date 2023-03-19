@@ -6,7 +6,6 @@ from tests.checkers.general import CheckerGeneral
 from tests.clients.clients_bundle import Client
 from tests.configuration import ROLE_ENUM
 from tests.configuration import ACCESSED_CATALOG_ENUM
-from tests.configuration import Dimension
 
 
 class Application:
