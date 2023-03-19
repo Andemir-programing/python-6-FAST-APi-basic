@@ -7,7 +7,7 @@ from api.product import crud
 from api.product.schemas import ProductIn, ProductOut, ProductInPut
 from db.session import db_session
 
-router_product = APIRouter(prefix="/product", tags=["Product"])
+router_product = APIRouter(prefix="/products", tags=["Product"])
 
 
 @router_product.post("", response_model=ProductOut)
