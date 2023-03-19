@@ -6,7 +6,7 @@ from tests.checkers.general import CheckerGeneral
 from tests.clients.clients_bundle import Client
 from tests.configuration import ROLE_ENUM
 from tests.configuration import ACCESSED_CATALOG_ENUM
-from tests.configuration import Dimension
+
 
 
 class Application:
@@ -40,16 +40,6 @@ class Application:
     def delete_user_post_condition(self):
         self.api_client.user.delete_user(self.user_id)
 
-    def create_product_precondition(self):
-        name = "autotest_" + "".join(random.sample(string.ascii_letters, 5))
-        price = random.randint(0, 1000000000)
-        dimension = random.choice(Dimension)
-        response = self.api_client.product.create_product(name, price, dimension)
-        assert response.status_code == 200, "can't create product"
-        self.employee_id = response.json()["id"]
-
-    def delete_product_post_condition(self):
-        self.api_client.product.delete_product(self.product_id)
 
 
 fixture = Application()
@@ -71,8 +61,4 @@ def user_fixture():
     fixture.delete_user_post_condition()
 
 
-@pytest.fixture(scope="session")
-def product_fixture():
-    fixture.create_product_precondition()
-    yield fixture
-    fixture.delete_product_post_condition()
+
