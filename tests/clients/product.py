@@ -4,7 +4,7 @@ from tests.configuration import url, token
 
 
 class ProductClient:
-    def _init_(self):
+    def __init__(self):
         self.url = url
         self.token = token
 
