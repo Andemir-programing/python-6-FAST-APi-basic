@@ -46,7 +46,7 @@ class Application:
                       "width":random.uniform(1,100000),
                       "height":random.uniform(1,100000)}
         response = self.api_client.product.create_product(name, price, dimension)
-        assert response.status_code == 200, "can't create product"
+        assert response.status_code == 200, "can't create products"
         self.product_id = response.json()["id"]
 
     def delete_product_post_condition(self):
