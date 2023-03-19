@@ -19,7 +19,7 @@ class ProductClient:
         print("TEXT", response.text)
 
     def get_products(self):
-        endpoint = f"{self.url}/products"
+        endpoint = f"{self.url}/productss"
         response = requests.get(endpoint)
         self.print_result(response)
         return response
@@ -31,7 +31,7 @@ class ProductClient:
         return response
 
     def create_product(self, name, price, dimension):
-        endpoint = f"{self.url}/product"
+        endpoint = f"{self.url}/products"
         req_dict = {
             "name": name,
             "price": price,
