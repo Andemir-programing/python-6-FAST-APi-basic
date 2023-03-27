@@ -35,7 +35,7 @@ class ProductClient:
         req_dict = {
             "name": name,
             "price": price,
-            "dimension": dimension
+            "dimensions": dimension
         }
 
         response = requests.post(endpoint, json=req_dict)
