@@ -1,0 +1,10 @@
+version: '3.9'
+
+services:
+  web:
+    build: docker build . -t python-6-fastapi-basic
+    command: docker run -p 80:8000 python-6-fastapi-basic
+    volumes:
+      - .:/app
+    ports:
+      - 80:8000
