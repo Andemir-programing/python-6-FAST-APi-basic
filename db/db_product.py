@@ -1,19 +1,19 @@
-from typing import Optional
+from typing import Optional, List, Type
 from sqlalchemy.orm import Session
 
 from db.models import Product
 from api.product.schemas import Dimension
 
 
-def get_product_by_id(db_session: Session, product_id: int) -> Optional[Product]:  # Product | None
+def get_product_by_id(db_session: Session, product_id: int) -> Optional[Type[Product]]:  # Product | None
     return db_session.query(Product).filter_by(id=product_id).first()
 
 
-def get_products_by_name(db_session: Session, product_name: str) -> list[Product]:
+def get_products_by_name(db_session: Session, product_name: str) -> List[Type[Product]]:
     return db_session.query(Product).filter_by(name=product_name).all()
 
 
-def get_all_products(db_session: Session) -> list[Product]:
+def get_all_products(db_session: Session) -> List[Type[Product]]:
     products = db_session.query(Product).all()
     return products
 
