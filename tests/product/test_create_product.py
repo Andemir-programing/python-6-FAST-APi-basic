@@ -18,4 +18,4 @@ def test_positive(product_fixture, dimension):
     response = product_fixture.api_client.product.create_product(name, price, dimension)
 
     assert response.status_code == 200, "Статус код не соответствует ожидаемому"
-    assert product_fixture.checkers.validate_json(response.json(), "schemas/product.json")
+    assert product_fixture.checkers.validate_json(response.json(), "schemas/product.json"
