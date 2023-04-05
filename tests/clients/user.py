@@ -62,3 +62,9 @@ class UserClient:
         response = requests.delete(endpoint)
         self.print_result(response)
         return response
+
+    def get_user_by_username(self, username: str = None):
+        endpoint = f"{self.url}/user/{username}"
+        response = requests.get(endpoint)
+        self.print_result(response)
+        return response

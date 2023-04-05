@@ -59,3 +59,9 @@ class ProductClient:
         response = requests.delete(endpoint)
         self.print_result(response)
         return response
+
+    def get_product_by_name(self, name: str = None):
+        endpoint = f"{self.url}/product/{name}"
+        response = requests.get(endpoint)
+        self.print_result(response)
+        return response

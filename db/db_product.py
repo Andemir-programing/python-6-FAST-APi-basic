@@ -31,7 +31,7 @@ def update_product(db_session: Session, product_id: int, new_product):
     if old_pr is not None:
         old_pr.name = new_product.name if new_product.name is not None else old_pr.name
         old_pr.price = new_product.price if new_product.price is not None else old_pr.price
-        old_pr.dimensions = new_product.dimensions if new_product.dimensions is not None else old_pr.dimensions
+        old_pr.dimensions = new_product.dimensions.dict() if new_product.dimensions is not None else old_pr.dimensions
         db_session.commit()
         db_session.refresh(old_pr)
         return old_pr

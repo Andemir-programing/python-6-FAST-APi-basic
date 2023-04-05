@@ -57,3 +57,9 @@ class EmployeeClient:
         response = requests.delete(endpoint)
         self.print_result(response)
         return response
+
+    def get_employee_by_name(self, name: str = None):
+        endpoint = f"{self.url}/employee/{name}"
+        response = requests.get(endpoint)
+        self.print_result(response)
+        return response
