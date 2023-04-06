@@ -80,7 +80,7 @@ for install uvicorn pip install uvicorn
   - ```docker run -p 80:8000 -d python-6-fastapi-basic``` - run container in daemon
   - ```docker exec -it 14c5d9385025 /bin/bash``` - enter ti container in terminal
   - ```docker logs -f 14c5d9385025``` - see logs in container
-  
+   
 
 - command for dockerfile:
   - pip install -r requirements.txt

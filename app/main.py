@@ -1,3 +1,4 @@
+import uvicorn
 from fastapi import FastAPI
 
 from api.employee.views import router_employee
