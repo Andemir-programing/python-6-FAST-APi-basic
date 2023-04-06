@@ -15,6 +15,7 @@ class Application:
         self.product_id = None
         self.checkers = CheckerGeneral()
         self.api_client = Client()
+        self.manufacturer_id = None
 
     def create_employee_precondition(self):
         name = "autotest_" + "".join(random.sample(string.ascii_letters, 5))
@@ -52,6 +53,17 @@ class Application:
     def delete_product_post_condition(self):
         self.api_client.product.delete_product(self.product_id)
 
+    def create_manufacturer_precondition(self):
+        name = "autotest_" + "".join(random.sample(string.ascii_letters, 5))
+        address = "autotest_address"
+        coefficient_sale = random.uniform(1, 100000)
+        response = self.api_client.manufacturer.create_manufacturer(name, address, coefficient_sale)
+        assert response.status_code == 200, "can't create manufacturer"
+        self.manufacturer_id = response.json()["id"]
+
+    def delete_manufacturer_post_condition(self):
+        self.api_client.manufacturer.delete_manufacturer(self.manufacturer_id)
+
 
 fixture = Application()
 
@@ -77,3 +89,10 @@ def product_fixture():
     fixture.create_product_precondition()
     yield fixture
     fixture.delete_product_post_condition()
+
+
+@pytest.fixture(scope="session")
+def manufacturer_fixture():
+    fixture.create_manufacturer_precondition()
+    yield fixture
+    fixture.delete_manufacturer_post_condition()
