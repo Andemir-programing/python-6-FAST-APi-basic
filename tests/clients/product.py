@@ -19,7 +19,7 @@ class ProductClient:
         print("TEXT", response.text)
 
     def get_products(self):
-        endpoint = f"{self.url}/product"
+        endpoint = f"{self.url}/products"
         response = requests.get(endpoint)
         self.print_result(response)
         return response
