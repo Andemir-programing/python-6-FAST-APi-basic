@@ -14,23 +14,27 @@
         }
       ]
     },
-    "role": {
+    "address": {
       "oneOf": [
         {
           "type": "null"
         },
         {
-          "type": "string",
-          "enum": [
-            "admin",
-            "expert",
-            "seller"
-          ]
+          "type": "string"
         }
       ]
-    }
-  },
-  "required": [
-    "id"
-  ]
+    },
+    "coefficient_sale": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "float"
+        }
+      ]
+    },
+    "required": [
+      "id"
+    ]}
 }
