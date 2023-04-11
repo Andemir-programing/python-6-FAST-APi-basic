@@ -96,3 +96,5 @@ def manufacturer_fixture():
     fixture.create_manufacturer_precondition()
     yield fixture
     fixture.delete_manufacturer_post_condition()
+
+#

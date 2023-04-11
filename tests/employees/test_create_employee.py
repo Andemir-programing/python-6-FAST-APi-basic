@@ -17,3 +17,4 @@ def test_positive(employee_fixture, name, role):
 
     assert response.status_code == 200, "Статус код не соответствует ожидаемому"
     assert employee_fixture.checkers.validate_json(response.json(), "schemas/employee.json")
+
