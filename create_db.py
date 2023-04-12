@@ -28,6 +28,7 @@ from sqlalchemy import (
     FLOAT,
     JSON
 )
+from config import DB_URL
 
 from config import DB_URL
 
@@ -69,6 +70,15 @@ employee_table = Table(
     Column("id", Integer, primary_key=True, unique=True, autoincrement=True),
     Column("name", String),
     Column("role", String)
+)
+
+manufacturer_table = Table(
+    'manufacturers',
+    metadata,
+    Column("id", Integer, primary_key=True, unique=True, autoincrement=True),
+    Column("name", String),
+    Column("address", String),
+    Column("coefficient_sale", FLOAT)
 )
 
 metadata.create_all(bind=engine)

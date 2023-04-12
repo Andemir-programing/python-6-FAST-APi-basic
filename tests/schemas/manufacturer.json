@@ -30,11 +30,13 @@
           "type": "null"
         },
         {
-          "type": "float"
+          "type": "number"
         }
       ]
-    },
-    "required": [
-      "id"
-    ]}
+    }
+  },
+  "required": [
+    "id"
+  ]
 }
+

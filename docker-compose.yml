@@ -1,10 +1,27 @@
-version: '3.9'
+# инструкция запуска docker образа (т.е. вместо команды docker run....)
+version: '3.7'
 
 services:
-  web:
-    build: docker build . -t python-6-fastapi-basic
-    command: docker run -p 80:8000 python-6-fastapi-basic
-    volumes:
-      - .:/app
+  api:
+    build:
+      context: .
+      target: builder
+    container_name: fastapi-application
+    environment:
+      PORT: 8000
     ports:
-      - 80:8000
+      - '80:8000'
+    restart: always
+
+    volumes:
+      - volume-python6:/app/storage
+volumes:
+  volume-python6:
+    external: true
+
+#volumes:
+#  db-data:
+#    external: true
+
+# docker-compose up -d --build
+# docker-compose down
