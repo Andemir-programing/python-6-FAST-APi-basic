@@ -1,10 +1,9 @@
-import uvicorn
 from fastapi import FastAPI
 
-from api.employee.views import router_employee
-from api.product.views import router_product
-from api.users.views import router_user
-from api.manufacturer.views import router_manufacturer
+from app.api.employee.views import router_employee
+from app.api.product.views import router_product
+from app.api.users.views import router_user
+from app.api.manufacturer.views import router_manufacturer
 
 
 app = FastAPI()
