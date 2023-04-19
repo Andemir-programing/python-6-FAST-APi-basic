@@ -3,9 +3,9 @@ from typing import List
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
-from api.manufacturer import crud
-from api.manufacturer.schemas import ManufacturerIn, ManufacturerOut
-from db.session import db_session
+from app.api.manufacturer import crud
+from app.api.manufacturer.schemas import ManufacturerIn, ManufacturerOut
+from app.db.session import db_session
 
 router_manufacturer = APIRouter(prefix="/manufacturer", tags=["manufacturer"])
 

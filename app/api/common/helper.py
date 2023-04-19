@@ -1,4 +1,4 @@
-from db.session import db_session
+from app.db.session import db_session
 
 
 def check_token(token):

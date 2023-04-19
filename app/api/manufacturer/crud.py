@@ -7,8 +7,9 @@ Delete
 from fastapi import HTTPException
 from sqlalchemy.orm import Session
 
-from api.manufacturer.schemas import ManufacturerIn, ManufacturerOut
-from db import db_manufacturer
+from app.api.manufacturer.schemas import ManufacturerIn, ManufacturerOut
+from app.db import db_manufacturer
+
 
 #manufacturer
 

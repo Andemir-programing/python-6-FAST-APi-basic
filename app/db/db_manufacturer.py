@@ -1,6 +1,6 @@
 from typing import Optional
 
-from db.models import Manufacturer
+from app.db.models import Manufacturer
 
 
 def get_manufacturer_by_id(db_session, manufacturer_id) -> Optional[Manufacturer]:
