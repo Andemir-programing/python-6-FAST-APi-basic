@@ -59,6 +59,4 @@ class User:
         else:
             raise HTTPException(status_code=404, detail={"message": "User not found!"})
 
-    def delete_user(self, user_id: int) -> None:
-        if not db_user.delete_user(self.db_session, user_id):
-            raise HTTPException(status_code=404, detail={"message": "User not found!"})
+

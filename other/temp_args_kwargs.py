@@ -56,3 +56,4 @@ add_3(*t)  # 10, 11, 12
 # Andemir Milana
 # Alina, "Biyaslan
 # Andy, Eldar
+import allure
